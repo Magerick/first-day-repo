@@ -85,7 +85,8 @@ button {
   cursor: pointer;
 }
 
-/* What does this CSS rule do? */
+/* What does this CSS rule do? 
+A: Select creates a drop-down with a list of options to click on.*/
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -112,12 +113,14 @@ select:hover, button:hover {
   box-shadow: 0 0 5px #999;
 }
 
-/* What does this pseudo-class mean? */
+/* What does this pseudo-class mean? 
+A: input:focus shows what area of the screen is being used when clicked. */
 .text-input:focus {
   border-right-width: 5px;
 }
 
-/* What does this pseudo-class mean? */
+/* What does this pseudo-class mean? 
+A: Displays placeholder text. */
 .text-input:placeholder-shown {
   border-style: dashed;
 }
@@ -136,13 +139,15 @@ select:hover, button:hover {
   margin-right: 2%;
 }
 
-/* What does this selector do? */
+/* What does this selector do? 
+A: Shows whether the checkbox is marked.*/
 .checkbox:checked + label {
   color: #999999;
   font-style: italic;
 }
 
-/* What does this selector do? */
+/* What does this selector do? 
+A: After the checkbox is checked, a text insert appears.*/
 .checkbox:checked + label::after {
   margin-left: 10px;
   font-size: 90%;
