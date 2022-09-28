@@ -13,7 +13,15 @@ function countdown() {
     //
     // YOUR CODE HERE
     //
-  });
+    timeLeft--;
+    timerEl.textContent = timeLeft + " seconds left";
+
+    if(timeLeft === 0) {
+      clearInterval(timeInterval);
+      displayMessage();
+    }
+
+  }, 1000);
 }
 
 // Displays the message one word at a time
