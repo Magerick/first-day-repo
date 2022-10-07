@@ -29,7 +29,12 @@ function handleFormSubmit(event) {
 }
 
 // TODO: Create a function to handle removing a list item when `.delete-item-btn` is clicked
-
-// TODO: Use event delegation and add an event listener to `shoppingListEl` to listen for a click event on any element with a class of `.delete-item-btn` and execute the function created above
+function deleteItemBtn.addEventListener("click") {
+  if deleteItemBtn = addEventListener() {
+    delete ("shoppingListItemEl");
+  }
+}
+// TODO: Use event delegation and add an event listener to `shoppingListEl` to listen for 
+// a click event on any element with a class of `.delete-item-btn` and execute the function created above
 
 shoppingFormEl.on('submit', handleFormSubmit);

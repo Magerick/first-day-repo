@@ -1,0 +1,30 @@
+:root {
+  --brown: #a88f82;
+  --tan: #f5e1d5;
+  --teal: #71a8a7;
+  --lightteal: #d5f5f5;
+  --light: #fffaf7;
+}
+
+/* Add your custom class style definitions here */
+/* HINT: Apply CSS variables using `var(--brown)` syntax as your property value */
+
+.custom-navbar {
+  background-color: var(--teal);
+}
+
+nav a {
+  color: var(--light);
+}
+
+nav a:hover {
+  color: var(--brown);
+}
+
+.custom-jumbotron {
+  background-color: var(--tan);
+}
+
+.custom btn {
+  background-color: var(--lightteal);
+}
