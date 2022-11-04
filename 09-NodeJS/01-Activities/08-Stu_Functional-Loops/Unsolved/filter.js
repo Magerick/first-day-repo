@@ -23,10 +23,12 @@ const isPrime = num => {
 };
 
 
-// TODO: Describe how filter is working in this example. What will the value of primeArray be? 
+// TODO: Describe how filter is working in this example. What will the value of primeArray be?
+// Filters numbers that aren't divisible into a new array full of prime numbers.
 const primeArray = originalArray.filter(isPrime);
 
 
-// TODO: Describe how filter is working in this example. What will the value of moreThan5Array be? 
+// TODO: Describe how filter is working in this example. What will the value of moreThan5Array be?
+// Makes a new array with numbers > 5.
 const moreThan5Array = originalArray.filter(num => num > 5);
 
