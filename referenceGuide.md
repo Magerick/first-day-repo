@@ -370,6 +370,203 @@ In this example, the code inside the `else` block will run because none of the o
         console.log("You are a child");
     }
 
+#### Objects/Arrays
+
+Objects and Arrays allow us to build more complicated data structures for storing our data. This is useful for taking a complex set of data and passing it around our project without needing to pass dozens of separate variables around.
+
+##### Objects
+
+Objects consist of `key-value pairs`, which are a key mapped to a corresponding value. We can `set` and `get` keys on the object to change and retrive its data.
+
+Creating an object is relatively simple:
+
+    {
+        key: {{ statement }},
+        key2: {{ statement }}
+    }
+
+The object starts with a single open curly brace `{` and ends with a single close curly brace `}`, very similar to how the blocks for loops, conditionals, and functions are defined.
+
+In the example above, we define two key-value pairs. The first has a key of `key` and the second has a key of `key2`. Each key-value pair ends with a comma. Because the value can be a statement, it can be anything that we would normally use a variable for. Here are some examples:
+
+    var obj = {
+        element: document.getElementById("element_id"),
+        age: 32,
+        name: "Bob Smith",
+        doSomething: function(a, b) {
+            return a + b;
+        }
+    }
+
+In this example, we create an object with 4 key value pairs. The first sets a key named `element` to a dom element that we fetch using `getElementById`. The second sets a key named `age` to the number 32. The third sets a key named `name` to the string `Bob Smith`. The third sets a key named `doSomething` to a method that adds together two inputs and returns the result.
+
+###### Setting and Getting properties
+
+There are two ways to access `properties` (which is another name for the key-value pairs of an object) of the object. The first is to use `dot notation`.
+
+    var obj = {
+        foo: 'bar'
+    };
+
+    var value_of_foo = obj.foo;
+    obj.foo = "baz";
+
+Note that like variables, we can put properties on the left hand side of an equals sign to set them.
+
+The second method is to use brackets, like with an array:
+
+    var obj = {
+        foo: 'bar'
+    };
+
+    var value_of_foo = obj["foo"];
+    obj["foo"] = "baz";
+
+Note in this case if you're using a string literal it must be in quotes, as opposed to the dot notation where it does not have to be.
+
+##### Arrays
+
+Arrays are indexed lists of data. Like objects, their values can be set to any valid statement, like the following:
+
+    var array = [
+        5,
+        true,
+        "Bob",
+        function() { return 5; },
+    ];
+
+You'll notice a number of similarities with objects. Like objects, values are separated with a comma. Array definitions start with an open square bracket, `[`, and end with a close square bracket, `]`.
+
+Array values can be accessed by using square brackets after the variable, like objects, but instead of strings, they require numerical keys. The first value of an index starts at `0`, with the second at `1` and so on.
+
+    var array = [
+        5,
+        true,
+        "Bob",
+        function() { return 5; },
+    ];
+
+    var name = array[2]; // the third element, which is "Bob"
+
+    array[3](); // the fourth element is the method
+
+You can see that we can even call a method that's in an array by using the code above.
+#### Functions/Methods
+
+Functions are a tool we can use to encapsulate repeated blocks of code. The general rule of thumb I like to follow is if you're doing something more than twice, you should probably make it into a function.
+
+##### Defining a Function
+
+Defining a function can be done like so:
+
+    function {{ function name }}({{ list of parameters}}) {
+        {{ code inside the function }}
+    }
+
+
+A parameter list is a comma separated list of variable names. These will hold the parameters that get passed into the function.
+
+    function addNumbers(number_1, number_2) {
+        return number_1 + number_2;
+    }
+
+Note that the return statement is optional, and only needed if you want to pass data back from the function once it's done. Return statements take the following format:
+
+    return {{ statement }};
+
+It can also be used to stop execution of the function early, like in the following example:
+
+    function serveDrink(age) {
+        if (age < 21) {
+            return;
+        }
+
+        console.log("Drink served!");
+    }
+
+The return statement above does not have a statement after it, which is valid. In this case the special value `undefined` is returned (which is also what happens if the function has no return statement at all).
+
+##### Calling a Function
+
+To utilize the code inside a function, we call it, using the following format:
+
+    {{ function name }}( {{ argument list }} );
+
+Where the parameter list was a list of variable names, the argument list is a list of statements. We can pass in scalar values, variables, other function calls, even other functions!
+
+    someFunction(1234, name_variable, getAge(), getBirthdate);
+
+##### Methods
+
+JavaScript has the concept of methods, which are functions that technically do not have a name, but are assigned to a variable or as a function argument. These are also known as `anonymous functions` since they are nameless.
+
+A method can be declared using the following format:
+
+    function( {{ parameter list}} ) {
+        {{ code inside method }}
+    }
+
+Note that this is basically the same as a function declaration, just missing the function name.
+
+A method declaration is a valid statement and so it can be used anywhere else a statement is called for. For example, we can assign one to a variable:
+
+    var addNumbers = function(number_1, number_2) {
+        return number_1 + number_2;
+    }
+
+We can call a method in a similar way to a function. However in this case, since it has no name, we will use the variable we assigned it to instead:
+
+    addNumbers(1, 5);
+
+Note that methods can have return statements just like functions. It is also extremely common to pass in a method as the argument to a function:
+
+    function performOperation(number_1, number_2, callback) {
+        return callback(number_1, number_2);
+    }
+
+    performOperation(5, 10, function(a, b) {
+        return a + b;
+    });
+
+Note when we pass a method as an argument to a function, it gets assigned to a parameter. We then call it just like we do normally, by using the variable name (remember parameters are variables) instead of the function name we would normally use.
+
+##### Methods as Object Values
+
+Since methods are statements, we can assign them as the values of objects or as items in arrays:
+
+    var obj = {
+        doSomething: function( {{ parameter list }} ) {
+            {{ function code }}
+        },
+    }
+
+    var array = [
+        "abcd",
+        1234,
+        function( {{ parameter list }}) {
+            {{ function code }}
+        },
+    ]
+
+Given the above examples, we can call these methods like so:
+
+    obj.doSomething( {{ argument list }} );
+    array[2]( {{ argument list }});
+
+##### this
+
+The concept of `this` can be convoluted. Essentially, `this` is a reference to the object context that the method is being called within. For any top level function, this will be `window`.
+
+    var obj = {
+        value: 0,
+        addValue: function(a) {
+            this.value += a;
+        },
+    };
+
+    obj.addValue(5);
+
+In the above example, `this` refers to `obj`, since `obj` is the context in which the `addValue` method is called. This can be useful in a number of situations, especially when we're passing callback methods deep into our program.
 ### Moment
 
 Moment is an extremely popular date/time library that enhances JavaScript's native ability to deal with dates and times. It is no longer supported by its authors, but is still widely used.
@@ -445,6 +642,27 @@ This will work, but it's more commonly done like this:
     });
 
 This is known as a `promise chain`, and it can continue for as long as you need it to. Later on we'll learn a nicer way of writing this code.
+
+#### Fetch Options
+
+To pass in options to fetch, pass them in as the second parameter to the `fetch` method:
+
+    fetch(url, {
+        method: 'POST', //GET is the default.
+    }).then(function(result) {
+        return result.json();
+    }).then(function(jsonValue) {
+        {{ handle the result here}}
+    });
+
+#### Common Fetch Options
+
+* method - the HTTP method to use. GET, POST, PUT, DELETE, PATCH, are some of them
+* cache - Indicates if cache should be used. Values include "default", "reload", "no-cache"
+* headers - this one is important, this will be an object to send headers along with the request.
+* redirect - indicates if 301 or 302 redirects should be automatically followed. Can be "follow", "error", or "manual"
+* body - the contents of the POST body, if you're sending a POST request
+
 
 ### Curl and URL Format
 
