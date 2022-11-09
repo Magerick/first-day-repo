@@ -702,3 +702,281 @@ Parameters to a POST request should be sent in the `request body`, which you can
     curl testdomain.com/params -X POST -H "Content-Type: application/json" -d '{"key":"value"}'
 
 Note the use of the -X flag to indicate a post request. The -H flag is a header. We're telling the server here that the body is JSON, so it can process it appropriately. Then we send the body with the -d flag as a JSON-encoded string.
+
+### ES6 Syntax
+
+ES6 is a common name for JavaScript features that were added after 2016. These are generally intended to make development easier and quicker, and everything here can be done without using these special features.
+
+#### Arrow Functions
+
+Arrow functions are very similar to `methods` in that they are anonymous functions (functions with no name) that can be assigned to variables or passed as arguments to other functions. An arrow function has the following format:
+
+    var myFunction = (param1, param2) => {
+        {{ code of function }}
+    }
+
+You can see it looks remarkably similar to a method, but is slightly easier to type.
+
+Arrow functions have a few special properties. The first is that they have `implicit return` if there is only 1 statement. Observe the following code:
+
+    var myFunction = (param1, param2) => {
+        return param1 + param2;
+    }
+
+    var myFunction = (param1, param2) => param1 + param2;
+
+In the second example, we are using an implicit return. The JavaScript interperter knows that it should compute the value of the single statement in the arrow function and use that result as the return value. This only works if there is only 1 statement.
+
+The second property of arrow functions is that if they have a single parameter, the parhenthesis are not required. For example:
+
+    var myFunction = param1 => param1 + 5;
+
+This is very handy if you're writing an extremely simple throwaway function, but can be messy if you try to do it to a complex method.
+
+##### Arrow Functions and this
+
+Arrow Functions have a special relationship with `this`. Observe the following code:
+
+    var say = function() {
+        console.log(this.name);
+    }
+
+    var obj = {
+        name: "Bob",
+        say: say,
+    };
+
+    obj.say();
+
+In this example, the value of `this` on the second line is automatically set to `obj` when we use `obj.say`. This is something JavaScript does automatically. It changes the _context_ of the method when it's called by a specific object.
+
+This example would print out "Bob".
+
+    var say = () => {
+        console.log(this.name);
+    }
+
+    var obj = {
+        name: "Bob",
+        say: say,
+    };
+
+    obj.say();
+
+In this example, we're using an arrow function instead of a method. Arrow Functions lock the value of `this` when they are created, and it cannot be changed. So when we use `obj.say`, JavaScript cannot change the value of `this` on line 2, because the Arrow Function doesn't allow it.
+
+This can be useful in some cases, like when you're passing a callback into `setTimeout` or `addEventListener`, both of which change the value of `this`.
+
+#### Let and Const
+
+`let` and `const` are new ways to declare variables that prevent a number of issues.
+
+##### Const
+
+Let's say that you had an API token like this:
+
+    var API_TOKEN = "my_token_here";
+
+And then somewhere down the line someone added this code:
+
+    API_TOKEN = "bad_token";
+
+Your code would start failing to call APIs and you wouldn't know why. That's where `const` comes in. If you declare a variable with `const` intead of `var`, its value can never be changed ever again.
+
+    const API_TOKEN = "my_token_here";
+
+    API_TOKEN = "bad_token"; // JavaScript will throw an error when it gets to this line.
+
+`const` is very useful for variables that never will change from their initial value.
+
+**NOTE** you can still modify/add/delete properties or values of arrays or objects that are declared as `const`.
+
+##### Let
+
+JavaScript has a "feature" called variable hoisting. That means if you write code like this:
+
+    if ({{ condition }}) {
+        var foo = 15;
+    }
+
+JavaScript will automatically turn it into this:
+
+    var foo
+    if ({{ condition }}) {
+        foo = 15;
+    }
+
+So what's the problem? Well it can be easy to accidentally override the value of a variable that you didn't intend to.
+
+    var message = "Bye!";
+    if (sayHello) {
+        var message = "Hello!";
+        console.log(message);
+    }
+
+    console.log(message);
+
+This code actually outputs "Hello!" twice. That's because the `var` declaration is hoisted to the top, so line 3 actually just overwrites the value, rather than making a new variable that is only in context for that if statement.
+
+`let` solves this problem. `let` variables are not hoisted, and go out of scope as soon as their corresponding block ends.
+
+    let message = "Bye!";
+    if (sayHello) {
+        let message = "Hello!";
+        console.log(message);
+    }
+
+    console.log(message);
+
+In this case, the variable at line 3 is a `let`, not a `var`, so it remains in scope of the if statement. Then once the if statement ends on line 5, it vanishes, leaving the `message` on line 1 as the sole variable of that name.
+
+#### Array Loop Methods
+
+There are three methods on arrays that are extremely useful for looping through arrays and doing various things to them. These methods are listed below:
+
+##### forEach
+
+The `forEach` method essentially provides a neat and tidy way to loop through an array and getting the value and index at each position.
+
+    const array = ["bob", "nancy", "dave"];
+
+    array.forEach((element, index) => {
+        console.log("The element at " + index + " is " + element);
+    });
+
+You'll notice that this behaves basically like a `for loop`, which we've used for looping through arrays before. This one is a bit cleaner though, and there are sometimes benefits to using a callback function.
+
+##### filter
+
+The `filter` method does as it says in the name-it filters elements of the array based on a criteria that you set, and returns a new array containing all the elements that match that filter.
+
+    const array = [1,2,3,4,5,6,7];
+
+    const belowFive = array.filter((element) => {
+        return element < 5;
+    });
+
+After this runs, the `belowFive` array will contain every element of `array` that is less than 5.
+
+##### map
+
+The `map` method loops over every element of the array and builds a new array of new elements based on the elements in it.
+
+    const array = [1,2,3,4];
+
+    const doubled = array.map((element) => {
+        return element * 2;
+    });
+
+After this runs, the `doubled` array will contain `[2, 4, 6, 8]`.
+
+#### Template Literals
+
+A template literal is a quicker way to build strings that contain lots of variables in JavaScript. Normally these strings have to be concatinated like this:
+
+    const string = "My name is " + name + " and my address is " + address;
+
+Template literals make this simpler:
+
+    const string = `My name is ${name} and my address is ${address}`;
+
+Note that they start and end with the backtick character. Any time you want to insert a variable, or indeed any JavaScript code, into the string, you can use the `${}` characters, with the code in the center.
+
+### Node and NPM
+
+#### Node
+
+Node (also known as Node.js) is an extremely common platform for backend development with JavaScript. Node is very easy to use. If you have a script titled `index.js`, then all you'd have to do to run it is this:
+
+    node index.js
+
+It's that simple!
+
+Common issues include:
+* Being in the wrong directory. Make sure you use terminal commands to get to the correct directory where your script is, before trying to run it.
+
+#### NPM
+
+NPM is short for Node Package Manager. It is a powerful tool that allows us to easily download and install third party libraries for use in our code. Often we will make use of this to extend the functionality of projects quickly, so that we can focus on other things.
+
+##### package.json
+
+NPM makes use of a file called `package.json` to determine what your project is all about. A sample looks like this:
+
+    {
+        "name": "solved",
+        "version": "1.0.0",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "ISC",
+        "dependencies": {
+            "inquirer": "8.2.4"
+        }
+    }
+
+A few of the fields are described in detail below. There are others, but they aren't necessarily as important to us right now.
+
+###### version
+
+NPM uses a format called [semver](https://semver.org/). Semver is made of three separate parts:
+
+    major_version.minor_version.patch_version
+    8.2.4
+
+So in the example above, the major version is 8, the minor version is 2, and the patch version is 4.
+
+What does this all mean? Well often as an API evolves, it changes enough that things it could do before are removed, or changed in a way that programs would break if they expect the older version. We call these breaking changes. Whenever this happens, a module will update its major version. NPM knows not to automatically upgrade projects if they have a major version bump.
+
+Minor and patch versions indicate non-breaking changes, so they are usually safe to upgrade without needing to change your code.
+
+###### name
+
+This is the name of the project, give it something descriptive enough that people understand what it is!
+
+###### dependencies
+
+The dependencies is an important part of the `package.json` file. It details all the different third party module that your project depends on. NPM will read this during install and will use it to determine what it needs to download and install for your project to function. The dependencies take the format of an object. The key is the module name, and the value is the version of that module that your project requires.
+
+##### npm init
+
+If you are just starting a project, then you won't have a `package.json` file. In order to generate one, you can use
+
+    npm init
+
+This will ask you a bunch of questions about your project, and at the end will generate your file. If you just want a file without answering questions you can use
+
+    npm init -y
+
+Which will choose the default for every question and generate you a quick `package.json` file.
+
+##### npm install
+
+npm install is the command responsible for actually downloading and installing the third party modules. If you run it with no additional arguments:
+
+    npm install
+
+It will go through your `package.json` file and will install every dependency
+
+If you run it with an argument, it will install that package:
+
+    npm install inquirer
+
+This will add the latest version `inquirer` to your `dependencies` in `package.json`. It will also install any other modules that are missing.
+
+You can also install a specific version of a module:
+
+    npm install inquirer@8.2.4
+
+This will also add `inquirer` to `dependencies`, but instead of the latest version it will install specifically the version you told it to. This can be useful in some situations.
+
+##### npm remove
+
+If you need to remove a package you can use npm remove:
+
+    npm remove inquirer
+
+This will uninstall the package and remove it from your `package.json` automatically.
