@@ -12,6 +12,7 @@ The items here are important to know and grasp. Not having an understanding of t
 * Module 4 - Everything in this module
 * Module 5 - Moment and Google Fonts
 * Module 6 - Fetch
+* Module 9 - Everything in this module is important to know by sight, but not necessarily understand completely. You will run across this code during your career, and you should be able to understand what it is.
 
 ## Medium Priority
 
