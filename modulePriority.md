@@ -12,7 +12,7 @@ The items here are important to know and grasp. Not having an understanding of t
 * Module 4 - Everything in this module
 * Module 5 - Moment and Google Fonts
 * Module 6 - Fetch
-* Module 9 - Everything in this module is important to know by sight, but not necessarily understand completely. You will run across this code during your career, and you should be able to understand what it is.
+* Module 10 - Promises, Classes
 
 ## Medium Priority
 
@@ -20,6 +20,8 @@ The items here are good to know as they will help you have a better toolkit for 
 
 * Module 2 - Pseudo elements. These are handy to know about, but we can use JavaScript to do the same actions.
 * Module 5 - Bootstrap. It's nice to know, but you can pick it up as necessary.
+* Module 9 - Everything in this module is important to know by sight, but not necessarily understand completely. You will run across this code during your career, and you should be able to understand what it is.
+* Module 10 - Functional Constructors, Testing. Testing is important, and you should learn the basics, but make sure you have a good grasp of JS fundamentals first.
 
 ## Low Priority
 
@@ -27,3 +29,4 @@ The items here are generally presented for historical purposes and can be skippe
 
 * Module 5 - jQuery. It's handy, but not as popular as it was before. Learn it if you like it, but it's not required.
 * Module 6 - jQuery AJAX function and XHR
+* Module 10 - Prototypes and Polymorphism
