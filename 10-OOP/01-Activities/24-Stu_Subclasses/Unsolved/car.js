@@ -1,6 +1,12 @@
 // TODO: Import the parent class
+const Vehicle = require('./vehicle.js');
 
 // TODO: Create a `Car` class that extends the `Vehicle` class
+class Car extends Vehicle() {
+  constructor(id, numberOfWheels, sound) {
+    super(Car, 4, 'beep');
+  }
+}
 
 const carPassengers = [
   'Aristotle',

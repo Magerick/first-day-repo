@@ -1,10 +1,29 @@
 class Character {
   // TODO: Add a constructor
-  // TODO: Create a printStats() method that console logs `this.name`, `this.strength`, and `this.hitPoints`
-
-  // TODO: Create a isAlive() method that returns a boolean based on whether or not a character's "hitpoints" are <= 0
-
-  // TODO: Create a attack() method that accepts an opponent object and decreases the opponent's "hitPoints" by this character's strength
+  constructor(name, strength, hitPoints);
+  // TODO: Create a printStats() method that console logs `this.name`, 
+  // `this.strength`, and `this.hitPoints`
+  printStats() {
+    this.name = `${Joe}`;
+    this.strength = `${9001}`;
+    this.hitPoints = `${9969}`;
+  }
+  // TODO: Create a isAlive() method that returns a boolean based on 
+  // whether or not a character's "hitpoints" are <= 0
+  isAlive() {
+    if (this.hitPoints <= `${0}`) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  // TODO: Create a attack() method that accepts an opponent object 
+  // and decreases the opponent's "hitPoints" by this character's strength
+  attack() {
+    if (this.strength === `${9001}`) {
+      return hitPoints = `${-9001}`;
+    }
+  }
 }
 
 // Creates two unique characters using the "character" constructor
